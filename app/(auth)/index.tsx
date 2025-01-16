@@ -1,31 +1,58 @@
-import { Link } from "expo-router";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { View, StyleSheet, Image } from 'react-native';
+import { Text, Button } from 'react-native-paper';
+import { Link } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Index() {
+const LandingScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <Link href="/(tabs)" style={styles.link}>
-        Go to Home
+    <SafeAreaView style={styles.container}>
+      {/* Logo */}
+      <Image source={require('../../assets/images/vojo-path.png')} style={styles.logo} />
+
+      {/* Welcome Text */}
+      <Text style={styles.title}>Vojo</Text>
+      <Text style={styles.slogan}>Your path to free expression</Text>
+
+      {/* Buttons */}
+      <Link href="/(auth)/(signup)" asChild>
+        <Button mode="contained" style={styles.button}>
+          Create Account
+        </Button>
       </Link>
-    </View>
+      <Link href="/login" asChild>
+        <Button mode="outlined" style={styles.button}>
+          Sign In
+        </Button>
+      </Link>
+    </SafeAreaView>
   );
-}
+};
+
+export default LandingScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
   },
   title: {
-    color: "black",
-    fontWeight: "bold",
-    fontSize: 24, // 3xl equivalent in Tailwind
+    fontSize: 50,
+    fontWeight: 'bold',
   },
-  link: {
-    color: "blue",
-    fontSize: 16, // Default size for links
+  slogan: {
+    fontSize: 15,
+    marginBottom: 100,
+  },
+  button: {
+    marginVertical: 10,
+    width: '80%',
   },
 });

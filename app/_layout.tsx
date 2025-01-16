@@ -7,6 +7,7 @@ import {
 
 import {Colors} from "../constants/Color";
 import { useColorScheme } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const customDarkTheme = { ...MD3DarkTheme, colors: Colors.dark };
 const customLightTheme = { ...MD3LightTheme, colors: Colors.light };
@@ -16,12 +17,14 @@ export default function RootLayout() {
   const paperTheme = colorScheme === "dark" ? customDarkTheme : customLightTheme;
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <Stack>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </PaperProvider>
+    <SafeAreaProvider>
+       <PaperProvider theme={paperTheme}>
+        <Stack>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </PaperProvider>
+    </SafeAreaProvider>
   )
 }
